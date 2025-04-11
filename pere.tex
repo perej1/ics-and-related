@@ -1,37 +1,50 @@
 \documentclass[11pt, aspectratio=169]{beamer}
 
+% Packages for math, language, encoding etc.
+\usepackage{tikz, ctable}
+\usepackage{bm}
+\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}	
+\usepackage{amsfonts,amssymb,amsbsy,amsthm,amsmath,mathtools,enumerate,verbatim}
+\usepackage{stmaryrd} % double square brackets
+\usepackage{color, colortbl}
+\usepackage[font=scriptsize]{caption}
+\usepackage{csquotes}
+\usepackage{tabularray}
+\usepackage{hyperref}
+\usepackage{datetime}
+
+\usepackage[T1]{fontenc}
+\usepackage[tracking=smallcaps, letterspace=-55]{microtype} % package for font spacing
+
 \author[Jaakko Pere]{Jaakko Pere}
+
 \title{On the Impact of Approximation Errors on Extreme Quantile Estimation with
 Applications to Functional Data Analysis}
-\subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari, Valentin Garino and Benny Avelin}
-\date{\today}%{\today}
+
+\subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari,
+Valentin Garino and Benny Avelin}
+
+%\newdate{date}{12}{3}{2025}
+\date{6th May, 2025}
+
 \institute{Dep.\ of Mathematics and Statistics, University of Helsinki}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % load packages
 % add packages if needed
 
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage{amsmath,amsfonts,amssymb,amsthm}
-\usepackage{color}
-\usepackage[tracking=smallcaps, letterspace=-55]{microtype} % package for font spacing
-
-\usepackage{transparent} % for setting opacity of pictures
-\usepackage{pifont} % for checkmark (\ding{51}) and cross (\ding{55})
-\usepackage{booktabs,array} % for tables
-\usepackage{graphicx} % for figures
-%\graphicspath{} % to set the path of figures
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set beamer colors
-
 \definecolor{hyblue}{RGB}{0,155,255}
 \definecolor{hyscience}{RGB}{252,163,17}
 
 \setbeamercolor{alerted text}{fg=hyscience}
 \setbeamercolor{structure}{fg=hyblue}
 \setbeamercolor{item}{fg=white}
+%\setbeamercolor{section in toc}{fg=white,bg=gray}
 
 \setbeamercolor{background canvas}{bg=black!90}
 \setbeamercolor{normal text}{fg=white}\usebeamercolor*{normal text}
@@ -41,7 +54,6 @@ Applications to Functional Data Analysis}
 % set font (helvetica plays the role of Arial)
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
-
 
 % set frametitle
 \setbeamercolor{frametitle}{fg=white}
@@ -54,6 +66,40 @@ Applications to Functional Data Analysis}
 
 % Other style settings
 \setbeamertemplate{itemize items}[circle] % makes the bullets in lists circles
+
+
+% Bibliography and style.
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{sources.bib}
+\setbeamertemplate{bibliography item}{}
+
+% Show greyed table of contents before section.
+\AtBeginSection[]
+{
+    \begin{frame}
+        \frametitle{Table of Contents}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+\setcounter{tocdepth}{1}
+
+
+\AtBeginSubsection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{subtitle}
+    \usebeamerfont{subtitle}\insertsubsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+\DeclareMathOperator{\mda}{MDA}
+\DeclareMathOperator{\mrv}{MRV}
+\DeclareMathOperator{\rv}{RV}
+\DeclareMathOperator{\erv}{ERV}
 
 \begin{document}
 
@@ -80,52 +126,171 @@ Applications to Functional Data Analysis}
   \end{frame}
 }
 
-
-\section{Examples}
-
-\begin{frame}{Some formulas}
-
-You can write some formulas
-$$ x^2 + y^2 = 1$$
-$$ x(t) = x_0 e^{rt} + \int_0^t e^{r(t-s)}f(s) ds$$
-
-and some \alert{alerted text}. 
-
+\begin{frame}{Agenda of the presentation}
+  \tableofcontents
 \end{frame}
 
+\section{Extreme Value Theory with Approximations}
 
-\begin{frame}{\MakeUppercase{Lists}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{itemize}
-\item list
-\begin{itemize}
-  \item plaa
-\end{itemize}
-\item without numbering
-\end{itemize}
-\pause
-\begin{itemize}
-\item[\checkmark] this works
-\item[\checkmark] this works
-\item[\textcolor{red}{\ding{55}}] % \ding requires package pifont
-this doesn't
-\end{itemize}
+\begin{frame}{What is Extreme Value Theory?}
+  Extreme value theory is concerned about inference of rare events.
+  \pause
+  \vspace{\baselineskip}
+  \begin{itemize}
+    \item Extreme quantile estimation
+    \item Tail probability estimation
+    \item Estimation of the endpoint of a given distribution
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{\MakeUppercase{A table}}
-\centering
-This is an example for a table with text
-\bigskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Maximum Domain of Attraction}
+  \begin{definition}
+    Let $Y_1, \ldots, Y_n$ be i.i.d.\ observations of a random variable $Y$. If
+    there exist sequences $a_n > 0$ and $b_n\in\mathbb{R}$, and a random
+    variable $G$ with a nondegenerate distribution such that
+    \begin{equation*}
+	    \frac{\max\left(Y_1, \ldots, Y_n\right) - b_n}{a_n}
+      \stackrel{\mathcal{D}}{\to} G, \quad n\to\infty,
+    \end{equation*}
+    we say that $Y$ belongs to the maximum domain of attraction of $G$, and
+    denote $Y\in\mda\left(G\right)$.
+  \end{definition}
+\end{frame}
 
-\begin{tabular}{rlc}
-\toprule
-Right-aligned & Left-aligned & Centered\\
-\midrule
-first entry & data 1 & gray \\
-second entry & data 2 & red\\
-\bottomrule
-\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% fisher1928
+\begin{frame}{Extreme Value Index}
+  \begin{theorem}[\cite{fisher1928,gnedenko1943}]
+    Up to location and scale, the distribution of $G = G_\gamma$ is
+    characterized by the parameter $\gamma$, called the \emph{extreme value
+    index}. That is, the distribution of ${G_\gamma}$ is of the type
+    \begin{equation*}
+      F_{G_\gamma}\left(x\right) =
+      \begin{cases}
+        \exp\left(-\left(1 + \gamma x\right)^{-1/\gamma}\right),
+        \quad 1 + \gamma x > 0 &\textnormal{if}\quad \gamma\neq 0, \\
+        \exp\left(-e^{-x}\right),
+        \quad x\in\mathbb{R} &\textnormal{if}\quad \gamma = 0.
+      \end{cases}
+    \end{equation*}
+  \end{theorem}
+  \pause
+  In the case $\gamma > 0$ the type of $G_\gamma$ is Fr\'echet,
+  \begin{equation*}
+    \Phi_\gamma\left(x\right) =
+    \begin{cases}
+      0, & x\leq 0 \\
+      \exp\left(-x^{-1/\gamma}\right), & x > 0.
+    \end{cases}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}{Tail Quantile Function}
+  Define tail quantile function corresponding to distribution $F$ by
+  \begin{equation*}
+    U\left(t\right) = F^{\leftarrow}\left(1 - \frac{1}{t}\right), \quad t > 1,
+  \end{equation*}
+  where we denote left-continuous inverse of a nondecreasing function by
+  $f^\leftarrow\left(y\right) = \inf\left\{x\in\mathbb{R} : f(x) \geq y\right\}$.
+  \pause
+  \begin{itemize}
+    \item[] 
+  \end{itemize}
+  That is, $U\left(1/p\right)$ is the $(1-p)$-quantile.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \begin{definition}[Regular variation]
+    A Lebesgue measurable function $f:\mathbb{R}^+\to\mathbb{R}$ that is
+    eventually positive is regularly varying with index $\alpha\in\mathbb{R}$ if
+    for all $x > 0$,
+    \begin{equation*}
+      \lim_{t\to\infty}\frac{f\left(tx\right)}{f\left(t\right)} = x^\alpha.
+    \end{equation*}
+    Then we denote $f\in RV_\alpha$. Furthermore, we say that a function $f$ is
+    slowly varying if $f\in RV_0$.
+  \end{definition}
+  \pause
+  Intuition:
+  \begin{equation*}
+    f\in\rv_\alpha \iff f(x) = L(x)x^{\alpha}, \quad L\in\rv_0.
+  \end{equation*}
+  We also have
+  \begin{equation*}
+    \lim_{x\to\infty} x^{-\varepsilon} L(x) = 0, \quad\forall
+    \, \varepsilon > 0.
+  \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Construction of an Extreme Quantile Estimator}
+  \begin{theorem}[\parencite{gnedenko1943,dehaan1970}]
+    Let $\gamma > 0$. We have
+    \begin{equation*}
+      Y\in\mda\left(G_\gamma\right) \iff 1-F\in RV_{-1/\gamma}
+      \iff U\in RV_\gamma.
+    \end{equation*}
+    \pause
+  \end{theorem}
+  Choose $t=n/k$ and $x = k/(np)$ to get the approximation
+    \begin{equation*}
+      U\left(\frac{1}{p}\right)\approx U\left(\frac{n}{k}\right)
+      \left(\frac{k}{np}\right)^{\gamma}.
+    \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Extreme Quantile Estimation}
+  Suppose $\bm Y = \left(Y_1, \ldots, Y_n\right)$ is an i.i.d.\ sample of
+  $Y\in\mda\left(G_\gamma\right)$, $\gamma > 0$. Denote order statistics
+  corresponding to the sample $\bm Y$ by $\bm Y_{1, n} \leq \dots \leq \bm Y_{n,
+  n}$. Then an estimator for the extreme $(1-p)$-quantile $x_{p} =
+  U\left(1/p\right)$ can be given as
+  \begin{equation*}
+    \hat x_{p}\left(\bm Y\right) = \bm Y_{n-k,n}
+    \left(\frac{k}{np}\right)^{\hat\gamma\left(\bm Y\right)},
+  \end{equation*}
+  where $\hat\gamma$ is an estimator for the extreme value index $\gamma$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The Hill Estimator \parencite{hill1975,mason1982}}
+  Suppose $\bm Y = \left(Y_1, \ldots, Y_n\right)$ is an i.i.d.\ sample of
+  $Y\in\mda\left(G_\gamma\right)$, $\gamma > 0$. The Hill estimator is defined
+  as
+  \begin{equation*}
+    \hat\gamma_H\left(\bm Y\right) = \frac{1}{k}\sum_{i = 0}^{k - 1}
+    \ln\left(\frac{\bm Y_{n-i,n}}{\bm Y_{n-k,n}}\right).
+  \end{equation*}
+  \pause
+  If additionally as $n\to\infty$, $k = k_n\to\infty$, $k/n\to 0$, then
+  \begin{equation*}
+    \hat\gamma_H\left(\bm Y\right)\stackrel{\mathbb{P}}{\to} \gamma,
+    \quad n\to\infty.
+  \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Impact of Approximation Errors}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extreme Quantile Estimation for $L^p$-Norms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[allowframebreaks]{References}
+  \printbibliography
 \end{frame}
 
 \end{document}
