@@ -1,0 +1,169 @@
+%This is a template for the University of Helsinki. If you have questions regarding the template please be in contact with uhbrand@helsinki.fi
+
+
+\documentclass[11pt, aspectratio=169]{beamer}
+  % papersize={16cm,9cm},
+
+%\mode<presentation>{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fill in the following information: AUTHOR, TITLE, DATE
+
+\author[Jaakko Pere]{Jaakko Pere}
+\title[Short title]{Long title}
+\subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari, Valentin Garino and Benny Avelin}
+\date{\today}%{\today}
+\institute{Dep.\ of Mathematics and Statistics, University of Helsinki}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% load packages
+% add packages if needed
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{color}
+\usepackage[tracking=smallcaps, letterspace=-55]{microtype} % package for font spacing
+
+\usepackage{transparent} % for setting opacity of pictures
+\usepackage{pifont} % for checkmark (\ding{51}) and cross (\ding{55})
+\usepackage{booktabs,array} % for tables
+\usepackage{graphicx} % for figures
+%\graphicspath{} % to set the path of figures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set beamer colors
+
+\definecolor{hyblue}{RGB}{0,155,255}
+\setbeamercolor{alerted text}{fg=hyblue}
+\setbeamercolor{structure}{fg=hyblue}
+\setbeamercolor{item}{fg=black}
+
+%\setbeamertemplate{itemize item}{\bullet}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set font (helvetica plays the role of Arial)
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set frametitle
+
+\setbeamercolor{frametitle}{fg=black}%{fg=hyblue}
+\setbeamerfont{frametitle}{series=\bfseries, size=\large}
+\setbeamertemplate{frametitle}[default][left,leftskip=3.5cm] % left shift of frame title
+\addtobeamertemplate{frametitle}{\vspace{0.5cm}}{\vspace{1cm}} % spacing above and below frame title
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set footline and headline
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{headline}{ }
+%\setbeamertemplate{footline}{%
+%	 \usebeamercolor[fg]{page number in head/foot}%
+%	 \usebeamerfont{page number in head/foot}%
+%	\hspace{0.5cm}	
+%	\includegraphics[width=2.5cm]{HY__LC05_txt__L_3L_B3____BW_cropped}
+%	\hfill
+%	\insertshorttitle\ /\ \insertshortauthor	\hfill
+%	\today	\hspace{0.5cm}
+%	\insertframenumber\,/\,\inserttotalframenumber \hspace{0.5cm} \vskip2pt%
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Other style settings
+\setbeamertemplate{itemize items}[circle] % makes the bullets in lists circles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For video
+
+% Embedding videos in Latex is deprecated at the time of writing, and is not included anymore. If this is not the case anymore at the time viewing, please, contact the University services so it can be readded to the template with timely specs. Meanwhile, have the video elsewhere and add a link to that.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Title page
+{
+\usebackgroundtemplate{
+\setlength{\unitlength}{1cm}
+\begin{picture}(16,8)
+    \put(-0.1,5){\includegraphics[width=3cm]{logo-gold.png}}
+\end{picture}
+\setlength{\unitlength}{1pt}
+}
+\setbeamertemplate{headline}{ }%
+\begin{frame}[noframenumbering]{}
+\vspace{2.5cm}
+\begin{center}
+\textcolor{hyblue}{\bf\MakeUppercase{\Large\inserttitle}} \\
+{\footnotesize\insertsubtitle} \\
+{\large\insertauthor} \\
+{\large\insertdate} \\
+{\large\insertinstitute}
+\end{center}
+\end{frame}
+}
+
+
+\section{Examples}
+
+\begin{frame}{Some formulas}
+
+You can write some formulas
+$$ x^2 + y^2 = 1$$
+$$ x(t) = x_0 e^{rt} + \int_0^t e^{r(t-s)}f(s) ds$$
+
+and some \alert{alerted text}. 
+
+\end{frame}
+
+
+\begin{frame}{\MakeUppercase{Lists}}
+
+\uncover<1->{
+\begin{itemize}
+\item list
+\item without numbering
+\end{itemize}
+}
+
+\uncover<2->{
+\begin{itemize}
+\item[\checkmark] this works
+\item[\checkmark] this works
+\item[\textcolor{red}{\ding{55}}] % \ding requires package pifont
+this doesn't
+\end{itemize}
+}
+
+\uncover<3>{
+    \begin{enumerate}
+    \item first item
+    \item second item
+    \end{enumerate}
+}
+\end{frame}
+
+\begin{frame}{\MakeUppercase{A table}}
+\centering
+This is an example for a table with text
+\bigskip
+
+
+\begin{tabular}{rlc}
+\toprule
+Right-aligned & Left-aligned & Centered\\
+\midrule
+first entry & data 1 & gray \\
+second entry & data 2 & red\\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\end{document}
+
+
+
+
+
