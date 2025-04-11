@@ -1,16 +1,8 @@
-%This is a template for the University of Helsinki. If you have questions regarding the template please be in contact with uhbrand@helsinki.fi
-
-
 \documentclass[11pt, aspectratio=169]{beamer}
-  % papersize={16cm,9cm},
-
-%\mode<presentation>{}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Fill in the following information: AUTHOR, TITLE, DATE
 
 \author[Jaakko Pere]{Jaakko Pere}
-\title[Short title]{Long title}
+\title{On the Impact of Approximation Errors on Extreme Quantile Estimation with
+Applications to Functional Data Analysis}
 \subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari, Valentin Garino and Benny Avelin}
 \date{\today}%{\today}
 \institute{Dep.\ of Mathematics and Statistics, University of Helsinki}
@@ -35,74 +27,57 @@
 % set beamer colors
 
 \definecolor{hyblue}{RGB}{0,155,255}
-\setbeamercolor{alerted text}{fg=hyblue}
+\definecolor{hyscience}{RGB}{252,163,17}
+
+\setbeamercolor{alerted text}{fg=hyscience}
 \setbeamercolor{structure}{fg=hyblue}
-\setbeamercolor{item}{fg=black}
+\setbeamercolor{item}{fg=white}
 
-%\setbeamertemplate{itemize item}{\bullet}
+\setbeamercolor{background canvas}{bg=black!90}
+\setbeamercolor{normal text}{fg=white}\usebeamercolor*{normal text}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setbeamertemplate{itemize item}{\color{white}\bullet}
+
 % set font (helvetica plays the role of Arial)
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set frametitle
 
-\setbeamercolor{frametitle}{fg=black}%{fg=hyblue}
+% set frametitle
+\setbeamercolor{frametitle}{fg=white}
 \setbeamerfont{frametitle}{series=\bfseries, size=\large}
-\setbeamertemplate{frametitle}[default][left,leftskip=3.5cm] % left shift of frame title
+\setbeamertemplate{frametitle}[default][left,leftskip=1cm] % left shift of frame title
 \addtobeamertemplate{frametitle}{\vspace{0.5cm}}{\vspace{1cm}} % spacing above and below frame title
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% set footline and headline
+% set footline
 \beamertemplatenavigationsymbolsempty
-\setbeamertemplate{headline}{ }
-%\setbeamertemplate{footline}{%
-%	 \usebeamercolor[fg]{page number in head/foot}%
-%	 \usebeamerfont{page number in head/foot}%
-%	\hspace{0.5cm}	
-%	\includegraphics[width=2.5cm]{HY__LC05_txt__L_3L_B3____BW_cropped}
-%	\hfill
-%	\insertshorttitle\ /\ \insertshortauthor	\hfill
-%	\today	\hspace{0.5cm}
-%	\insertframenumber\,/\,\inserttotalframenumber \hspace{0.5cm} \vskip2pt%
-%}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Other style settings
 \setbeamertemplate{itemize items}[circle] % makes the bullets in lists circles
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% For video
-
-% Embedding videos in Latex is deprecated at the time of writing, and is not included anymore. If this is not the case anymore at the time viewing, please, contact the University services so it can be readded to the template with timely specs. Meanwhile, have the video elsewhere and add a link to that.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 % Title page
 {
-\usebackgroundtemplate{
-\setlength{\unitlength}{1cm}
-\begin{picture}(16,8)
-    \put(-0.1,5){\includegraphics[width=3cm]{logo-gold.png}}
-\end{picture}
-\setlength{\unitlength}{1pt}
-}
-\setbeamertemplate{headline}{ }%
-\begin{frame}[noframenumbering]{}
-\vspace{2.5cm}
-\begin{center}
-\textcolor{hyblue}{\bf\MakeUppercase{\Large\inserttitle}} \\
-{\footnotesize\insertsubtitle} \\
-{\large\insertauthor} \\
-{\large\insertdate} \\
-{\large\insertinstitute}
-\end{center}
-\end{frame}
+  \setbeamercolor{background canvas}{bg=black!90}
+  \setbeamertemplate{background}{
+    \setlength{\unitlength}{1cm}
+    \begin{picture}(16,8)
+      \put(-0.1,5){\includegraphics[width=3cm]{logo-white.png}}
+    \end{picture}
+    \setlength{\unitlength}{1pt}
+  }
+  %\setbeamertemplate{headline}{ }%
+  \begin{frame}
+    \vspace{2.5cm}
+    \begin{center}
+      \textcolor{hyblue}{\bf\MakeUppercase{\Large\inserttitle}} \\
+      {\footnotesize\insertsubtitle} \\
+      {\large\insertauthor} \\
+      {\large\insertdate} \\
+      {\large\insertinstitute}
+    \end{center}
+  \end{frame}
 }
 
 
@@ -121,28 +96,20 @@ and some \alert{alerted text}.
 
 \begin{frame}{\MakeUppercase{Lists}}
 
-\uncover<1->{
 \begin{itemize}
 \item list
+\begin{itemize}
+  \item plaa
+\end{itemize}
 \item without numbering
 \end{itemize}
-}
-
-\uncover<2->{
+\pause
 \begin{itemize}
 \item[\checkmark] this works
 \item[\checkmark] this works
 \item[\textcolor{red}{\ding{55}}] % \ding requires package pifont
 this doesn't
 \end{itemize}
-}
-
-\uncover<3>{
-    \begin{enumerate}
-    \item first item
-    \item second item
-    \end{enumerate}
-}
 \end{frame}
 
 \begin{frame}{\MakeUppercase{A table}}
