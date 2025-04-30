@@ -353,6 +353,67 @@ Valentin Garino and Benny Avelin \\
 
 \section{Extreme Quantile Estimation for $L^p$-Norms}
 
+\begin{frame}{Riemann Sum Approximated Norms}
+  Let $\gamma > 0$. Let $X_i$ be i.i.d.\ copies of $X\in L^p\left([0,1]\right)$,
+  $p\in [1,\infty]$, s.t. $Y = \|X\|_p\in\mda\left(G_\gamma\right)$. Let $\hat
+  Y_i$ be the Riemann sum approximated norms (based on discretizations with $m$
+  equidistant observed points). Suppose for all $s,t\in [0,1]$, $X$ satisfies
+  \begin{equation*}
+    \left|X(t) - X(s)\right| \leq V\phi\left(|t-s|\right) \quad a.s.,
+  \end{equation*}
+  for some random variable $V\in\mda\left(G_{\gamma'}\right)$, $\gamma' > 0$,
+  and for some continuous decreasing function $\phi:\mathbb{R}^+\to
+  \mathbb{R}^+$ with $\phi\left(0\right) = 0$. Then the condition
+  \begin{equation*}
+    \sqrt{k}\frac{\bm E_{n,n}}{U_Y\left(n/k\right)}\stackrel{\mathbb{P}}{\to}0,
+    \quad n\to\infty,
+  \end{equation*}
+  translates into
+  \begin{equation*}
+    \sqrt{k}\phi\left(\frac{1}{m}\right)k^\gamma n^{\gamma' - \gamma}\to 0,
+    \quad n\to\infty.
+  \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Concentration for $\hat\gamma(\hat{\bm Y})$} In order to give
+  concentration inequality for $\mathbb{P}\left(\left|\hat\gamma(\hat{\bm Y}) -
+  \hat\gamma(\bm Y)\right| > x\right)$ one needs to control the errors
+  \begin{equation*}
+    \mathbb{P}\left(\frac{\bm E_{n,n}}{U_Y\left(n/k\right)} > x\right)
+  \end{equation*}
+  and the convergence
+  \begin{equation*}
+    \mathbb{P}\left(\left|\frac{\bm
+    Y_{n-k,n}}{U(n/k)} - 1\right| > x\right).
+  \end{equation*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Chernoff-Type Bound for Intermediate Order Statistics}
+  Let $\gamma > 0$. Let $\bm Y = \left(Y_1, \ldots, Y_n\right)$ be an i.i.d.\
+  sample of $Y\in\mda\left(G_\gamma\right)$ and assume that, as $n\to\infty$,
+  $k=k_n\to\infty$, and $k/n\to 0$. Then for sufficiently large $n$
+  \begin{equation*}
+    \mathbb{P}\left(\left|\frac{\bm
+    Y_{n-k,n}}{U(n/k)} - 1\right| > x\right)
+    \leq C_1 e^{-C_2 k},
+  \end{equation*} 
+  where the constants $C_1 > 0$ and $C_2 > 0$ depend on $x$ and $\gamma$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  Thank you for your attention!
+  \begin{itemize}
+    \item[]
+  \end{itemize}
+  Link to arXiv: \url{https://doi.org/10.48550/arXiv.2307.03581}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[allowframebreaks]{References}
