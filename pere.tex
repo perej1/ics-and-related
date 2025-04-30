@@ -26,10 +26,12 @@
 Applications to Functional Data Analysis}
 
 \subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari,
-Valentin Garino and Benny Avelin}
+Valentin Garino and Benny Avelin \\
+\url{https://doi.org/10.48550/arXiv.2307.03581}}
 
-%\newdate{date}{12}{3}{2025}
-\date{6th May, 2025}
+
+
+\date{7th May, 2025}
 
 \institute{Dep.\ of Mathematics and Statistics, University of Helsinki}
 
@@ -130,7 +132,7 @@ Valentin Garino and Benny Avelin}
   \tableofcontents
 \end{frame}
 
-\section{Extreme Value Theory with Approximations}
+\section{Univariate Extreme Value Theory}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -282,6 +284,70 @@ Valentin Garino and Benny Avelin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Impact of Approximation Errors}
+
+\begin{frame}{The General Framework}
+  \begin{itemize}
+    \item What if instead of the sample $\bm Y$, only approximations $\hat{\bm
+    Y} = (\hat Y_1, \ldots, \hat Y_n)$ are available?
+    \pause
+    \item How the approximation error affects the asymptotics?
+    \pause
+    \item $\Rightarrow$ Useful approach in multivariate and infinite dimensional
+    settings:
+    \begin{itemize}
+      \item Let $X\in \mathbb{S}$ be a random object, where, e.g., $\mathbb{S} =
+      \mathbb{R}^d$ or $\mathbb{S} = L^p([0,1]^d)$.
+      \item Let $g:\mathbb{S}\to\mathbb{R}$ be some suitable map.
+      \item Apply extreme value theory to $g(X)$.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Approximated $L^p$-Norms}
+  \begin{itemize}
+    \item Let $X\in L^p\left([0, 1]^d\right)$, and let $X_1,\ldots, X_n$ be
+    i.i.d.\ copies of $X$.
+    \item We wish to estimate extreme value index and extreme quantiles
+    corresponding to $\|X\|_p\in\mda\left(G_\gamma\right)$, $\gamma > 0$.
+    \pause
+    \item In practice we never observe $X_1, \ldots, X_n$.
+    \pause
+    \item Approximate norms with Riemann sums or Monte Carlo integration.
+    \item Use approximated norms $\hat{Y}_i$ in the estimation.
+    \pause
+    \item As the estimator of the extreme value index we choose the Hill
+    estimator
+    \begin{equation*}
+      \hat\gamma(\hat{\bm Y}) = \frac{1}{k}\sum_{i = 0}^{k-1}
+      \ln\left(\frac{\hat{\bm Y}_{n-i,n}}{\hat{\bm Y}_{n-k,n}}\right).
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Draft of the Main Result}
+  Let $\gamma > 0$. Let $Y_1, \ldots, Y_n$ be i.i.d.\ copies of
+  $Y\in\mda\left(G_\gamma\right)$ and $\hat{\bm Y} = (\hat Y_1, \ldots, \hat
+  Y_n)$ the corresponding approximations. Denote errors by $E_i = \left|\hat Y_i
+  - Y_i\right|$. If
+  \begin{equation*}
+    \sqrt{k}\frac{\bm E_{n,n}}{U_Y\left(n/k\right)}\stackrel{\mathbb{P}}{\to}0,
+    \quad n\to\infty,
+  \end{equation*}
+  then
+  \begin{equation*}
+    \sqrt{k}\left(\hat\gamma(\hat{\bm Y}) - \gamma\right)
+    \quad\textnormal{and}\quad
+    \frac{\sqrt{k}}{\ln\left(k/(np)\right)}\left(\frac{\hat x_p(\hat{\bm Y})}
+    {U(1/p)} - 1\right)
+  \end{equation*}
+  are asymptotically normally distributed under the standard assumptions
+  (second-order condition, rate for $p = p_n$, $k = k_n\to\infty$, $k/n\to 0$,
+  as $n\to\infty$). 
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
