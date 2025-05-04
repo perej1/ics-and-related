@@ -17,7 +17,8 @@
 \usepackage{datetime}
 
 \usepackage[T1]{fontenc}
-\usepackage[tracking=smallcaps, letterspace=-55]{microtype} % package for font spacing
+% package for font spacing
+\usepackage[tracking=smallcaps, letterspace=-55]{microtype} 
 
 \author[Jaakko Pere]{Jaakko Pere}
 
@@ -28,8 +29,6 @@ Applications to Functional Data Analysis}
 Valentin Garino and Benny Avelin \\
 \textcolor{hyscience}{\url{https://doi.org/10.48550/arXiv.2307.03581}}
 (submitted to a journal)}
-
-
 
 \date{7th of May, 2025}
 
@@ -72,9 +71,46 @@ Valentin Garino and Benny Avelin \\
 % Bibliography and style.
 \usepackage[style=apa]{biblatex}
 \addbibresource{sources.bib}
-\setbeamertemplate{bibliography item}{}
 
-%\usepackage{hyperref}
+\DeclareCiteCommand{\cite}
+  {\color{hyscience}\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+  
+\DeclareCiteCommand{\textcite}
+  {\color{hyscience}\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \iffirstcitekey
+     {\setcounter{textcitetotal}{1}}
+     {\stepcounter{textcitetotal}%
+      \textcitedelim}%
+   \usebibmacro{textcite}}
+  {\ifbool{cbx:parens}
+     {\bibcloseparen\global\boolfalse{cbx:parens}}
+     {}}
+  {\usebibmacro{textcite:postnote}}  
+
+\DeclareCiteCommand{\parencite}[\mkcolorbibparens]
+  {\usebibmacro{prenote}}%
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\makeatletter
+\newrobustcmd{\mkcolorbibparens}[1]{%
+  \begingroup
+  \color{hyscience}%
+  \blx@blxinit
+  \blx@setsfcodes
+  \bibopenparen#1\bibcloseparen
+  \endgroup}
+\makeatother
+
+
+\setbeamertemplate{bibliography item}{}
 
 % Show greyed table of contents before section.
 \AtBeginSection[]
@@ -147,14 +183,12 @@ Valentin Garino and Benny Avelin \\
     \item Tail probability estimation
     \item Estimation of the endpoint of a given distribution
   \end{itemize}
-  \pause
-  See~\cite{dehaan2006} for a review.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Maximum Domain of Attraction}
-  \begin{definition}
+\begin{frame}
+  \begin{definition}[Maximum domain of attraction]
     Let $Y_1, \ldots, Y_n$ be i.i.d.\ observations of a random variable $Y$. If
     there exist sequences $a_n > 0$ and $b_n\in\mathbb{R}$, and a random
     variable $G$ with a nondegenerate distribution such that
@@ -492,8 +526,3 @@ Valentin Garino and Benny Avelin \\
 \end{frame}
 
 \end{document}
-
-
-
-
-
