@@ -27,11 +27,11 @@ Applications to Functional Data Analysis}
 
 \subtitle{Based on collaboration with Pauliina Ilmonen, Lauri Viitasaari,
 Valentin Garino and Benny Avelin \\
-\url{https://doi.org/10.48550/arXiv.2307.03581}}
+\url{https://doi.org/10.48550/arXiv.2307.03581} (submitted to a journal)}
 
 
 
-\date{7th May, 2025}
+\date{7th of May, 2025}
 
 \institute{Dep.\ of Mathematics and Statistics, University of Helsinki}
 
@@ -164,7 +164,7 @@ Valentin Garino and Benny Avelin \\
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% fisher1928
+
 \begin{frame}{Extreme Value Index}
   \begin{theorem}[\cite{fisher1928,gnedenko1943}]
     Up to location and scale, the distribution of $G = G_\gamma$ is
@@ -191,13 +191,16 @@ Valentin Garino and Benny Avelin \\
   \end{equation*}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Tail Quantile Function}
-  Define tail quantile function corresponding to distribution $F$ by
+  Define the tail quantile function corresponding to a distribution $F$ by
   \begin{equation*}
     U\left(t\right) = F^{\leftarrow}\left(1 - \frac{1}{t}\right), \quad t > 1,
   \end{equation*}
-  where we denote left-continuous inverse of a nondecreasing function by
-  $f^\leftarrow\left(y\right) = \inf\left\{x\in\mathbb{R} : f(x) \geq y\right\}$.
+  where we denote the left-continuous inverse of a nondecreasing function by
+  $f^\leftarrow\left(y\right) = \inf\left\{x\in\mathbb{R} : f(x) \geq
+  y\right\}$.
   \pause
   \begin{itemize}
     \item[] 
@@ -215,8 +218,8 @@ Valentin Garino and Benny Avelin \\
     \begin{equation*}
       \lim_{t\to\infty}\frac{f\left(tx\right)}{f\left(t\right)} = x^\alpha.
     \end{equation*}
-    Then we denote $f\in RV_\alpha$. Furthermore, we say that a function $f$ is
-    slowly varying if $f\in RV_0$.
+    Then we denote $f\in \rv_\alpha$. Furthermore, we say that a function $f$ is
+    slowly varying if $f\in \rv_0$.
   \end{definition}
   \pause
   Intuition:
@@ -236,8 +239,8 @@ Valentin Garino and Benny Avelin \\
   \begin{theorem}[\parencite{gnedenko1943,dehaan1970}]
     Let $\gamma > 0$. We have
     \begin{equation*}
-      Y\in\mda\left(G_\gamma\right) \iff 1-F\in RV_{-1/\gamma}
-      \iff U\in RV_\gamma.
+      Y\in\mda\left(G_\gamma\right) \iff 1-F\in \rv_{-1/\gamma}
+      \iff U\in \rv_\gamma.
     \end{equation*}
     \pause
   \end{theorem}
@@ -409,9 +412,11 @@ Valentin Garino and Benny Avelin \\
 \begin{frame}
   Thank you for your attention!
   \begin{itemize}
-    \item[]
+    \item Link to the manuscript (arXiv): \\
+    \url{https://doi.org/10.48550/arXiv.2307.03581}
+    \item Link to slides (Github): \\
+    \url{https://github.com/perej1/ics-and-related}
   \end{itemize}
-  Link to arXiv: \url{https://doi.org/10.48550/arXiv.2307.03581}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
