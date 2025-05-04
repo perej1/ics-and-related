@@ -14,7 +14,6 @@
 \usepackage[font=scriptsize]{caption}
 \usepackage{csquotes}
 \usepackage{tabularray}
-\usepackage{hyperref}
 \usepackage{datetime}
 
 \usepackage[T1]{fontenc}
@@ -69,11 +68,12 @@ Valentin Garino and Benny Avelin \\
 % Other style settings
 \setbeamertemplate{itemize items}[circle] % makes the bullets in lists circles
 
-
 % Bibliography and style.
-\usepackage[style=authoryear]{biblatex}
+\usepackage[style=apa]{biblatex}
 \addbibresource{sources.bib}
 \setbeamertemplate{bibliography item}{}
+
+%\usepackage{hyperref}
 
 % Show greyed table of contents before section.
 \AtBeginSection[]
@@ -102,6 +102,7 @@ Valentin Garino and Benny Avelin \\
 \DeclareMathOperator{\mrv}{MRV}
 \DeclareMathOperator{\rv}{RV}
 \DeclareMathOperator{\erv}{ERV}
+\DeclareMathOperator{\lp}{L}
 
 \begin{document}
 
@@ -145,6 +146,8 @@ Valentin Garino and Benny Avelin \\
     \item Tail probability estimation
     \item Estimation of the endpoint of a given distribution
   \end{itemize}
+  \pause
+  See~\cite{dehaan2006} for a review.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,7 +239,7 @@ Valentin Garino and Benny Avelin \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Construction of an Extreme Quantile Estimator}
-  \begin{theorem}[\parencite{gnedenko1943,dehaan1970}]
+  \begin{theorem}[\cite{gnedenko1943,dehaan1970}]
     Let $\gamma > 0$. We have
     \begin{equation*}
       Y\in\mda\left(G_\gamma\right) \iff 1-F\in \rv_{-1/\gamma}
@@ -286,31 +289,70 @@ Valentin Garino and Benny Avelin \\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Impact of Approximation Errors}
+\section{Multidimensional Extremes and Impact of Approximation Errors}
 
-\begin{frame}{The General Framework}
+\begin{frame}{A Traditional Approach to Extremes}
+  \small
+  \begin{definition}[Multivariate regular variation]
+    Let $\Theta$ be a probability measure on the unit sphere $\mathbb{S}^{d-1} =
+    \{\bm x\in\mathbb{R}^d : \left\|\bm x\right\|_2 = 1\}$. A $d$-dimensional
+    random vector $X$ is multivariate regularly varying with the extreme value
+    index $\gamma > 0$ and the probability measure $\Theta$ if
+    \begin{equation*}
+      \lim_{t\to\infty} \frac{\mathbb{P}\left(\left\| X \right\|_2 \geq tx,
+      X/\left\|X\right\|_2\in A\right)}
+      {\mathbb{P}\left(\left\|X\right\|_2\geq t\right)} = x^{-1/\gamma}
+      \Theta\left(A\right),
+    \end{equation*}
+    for every $x > 0$ and for every Borel set $A$ in $\mathbb{S}^{d-1}$ with
+    $\Theta\left(\partial A\right) = 0$.
+\end{definition}
+\pause
+\begin{itemize}
+  \item Estimation of multivariate extreme quantile regions under multivariate
+  regular variation based on
   \begin{itemize}
-    \item What if instead of the sample $\bm Y$, only approximations $\hat{\bm
-    Y} = (\hat Y_1, \ldots, \hat Y_n)$ are available?
-    \pause
-    \item How the approximation error affects the asymptotics?
-    \pause
-    \item $\Rightarrow$ Useful approach in multivariate and infinite dimensional
-    settings:
+    \item density~\parencite{cai2011}, and
+    \item half-space depth~\parencite{he2016}.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{An Alternative Framework}
+  \begin{enumerate}
+    \item Approach in multidimensional extremes:
     \begin{itemize}
       \item Let $X\in \mathbb{S}$ be a random object, where, e.g., $\mathbb{S} =
-      \mathbb{R}^d$ or $\mathbb{S} = L^p([0,1]^d)$.
-      \item Let $g:\mathbb{S}\to\mathbb{R}$ be some suitable map.
-      \item Apply extreme value theory to $g(X)$.
+      \mathbb{R}^d$ or $\mathbb{S} = \lp^p([0,1]^d)$.
+      \pause
+      \item Apply extreme value theory to $g(X)$, where $g$ is a suitable map depending on the context.
     \end{itemize}
+    \pause
+    \item Often instead of the sample $\bm Y$, only approximations $\hat{\bm Y}
+    = (\hat Y_1, \ldots, \hat Y_n)$ are available.
+    \pause
+    \begin{itemize}
+      \item How the approximation error affects the asymptotics?
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Applications}
+  \begin{itemize}
+    \item Elliptical extreme quantile region estimation~\parencite{pere2024}.
+    \item Extreme value index estimation for latent model~\parencite{virta2024}.
+    \item Estimation of the extreme value index corresponding to functional PCA
+    scores~\parencite{kim2019}.
   \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Approximated $L^p$-Norms}
+\begin{frame}{Approximated $\lp^p$-Norms}
   \begin{itemize}
-    \item Let $X\in L^p\left([0, 1]^d\right)$, and let $X_1,\ldots, X_n$ be
+    \item Let $X\in \lp^p\left([0, 1]^d\right)$, and let $X_1,\ldots, X_n$ be
     i.i.d.\ copies of $X$.
     \item We wish to estimate extreme value index and extreme quantiles
     corresponding to $\|X\|_p\in\mda\left(G_\gamma\right)$, $\gamma > 0$.
@@ -352,9 +394,7 @@ Valentin Garino and Benny Avelin \\
   as $n\to\infty$). 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Extreme Quantile Estimation for $L^p$-Norms}
+\section{Extreme Quantile Estimation for $\lp^p$-Norms}
 
 \begin{frame}{Riemann Sum Approximated Norms}
   Let $\gamma > 0$. Let $X_i$ be i.i.d.\ copies of $X\in L^p\left([0,1]\right)$,
