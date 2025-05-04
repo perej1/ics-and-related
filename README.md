@@ -1,2 +1,4 @@
 # ics-and-related
-Invariant Coordinate Selection and Related Method Conference
+
+My presentation for the "Invariant Coordinate Selection and Related Method"
+Conference.
